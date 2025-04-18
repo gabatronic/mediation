@@ -3,14 +3,14 @@
 <template>
     <div class="w-full bg-white relative text-black py-10 border-t-2 border-gray-200">
         <div class="container mx-auto">
-            <div class="grid grid-cols-2">
-                <div class="">
+            <div class="grid sm:grid-cols-2">
+                <div class="p-4 sm:p-0 order-last sm:order-first">
                     <img src="../assets/images/idverse_logo.png" alt="Logo Uanataca" class="w-44 mb-10" />
                     <div class="w-full text-gray-300">
                         © 2025 IDVERSE, S.L. Todos los derechos reservados.
                     </div>
                 </div>
-                <div class="grid grid-cols-3">
+                <div class="grid sm:grid-cols-3 p-4 sm:p-0">
                     <div>
                         <h3 class="text-lg font-bold">Información Legal</h3>
                         <ul class="text-gray-400">

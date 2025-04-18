@@ -7,9 +7,10 @@ import MainView from './views/MainView.vue';
 
 <template>
   
-  <header class="w-full">
+  <header class="w-full fixed z-20 bg-background">
     <Menu />
   </header>
+  <div class="h-16"></div>
   <MainView />
   <HomeFooter />
   

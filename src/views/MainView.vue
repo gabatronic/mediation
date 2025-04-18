@@ -13,7 +13,7 @@ import FileCheckIcon from '../components/Icons/FileCheckIcon.vue';
   <!-- Main content -->
   <div class="container mx-auto py-5 sm:py-10">
     <h1 class="text-4xl font-bold text-center my-15">Simple, rápido y legalmente válido</h1>
-    <div class="flex flex-row gap-10 justify-center items-center">
+    <div class="grid  sm:flex sm:flex-row gap-10 justify-center items-center">
       <IconCard 
         icon-name="UserCheck" 
         title="Rellena la Información Básica" 
@@ -56,7 +56,7 @@ import FileCheckIcon from '../components/Icons/FileCheckIcon.vue';
         </p>
       </div>
 
-      <div class="py-8 mx-auto grid grid-cols-3 gap-10 w-3/4 ">
+      <div class="py-8 mx-auto grid sm:grid-cols-3 gap-10 w-3/4 ">
         <div class="flex flex-col gap-8 items-start">
           <BalanceIcon class="w-16 h-16 stroke-black" />
           <p class="font-bold text-xl">Ley 1/2025</p>

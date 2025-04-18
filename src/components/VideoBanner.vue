@@ -3,11 +3,11 @@
 <template>
     <div class="w-full bg-black relative h-190">        
         <div class="absolute mx-auto w-full text-white bg-black/50 font-inter h-190 flex flex-col gap-10 z-10 top-0 sm:pt-20">
-            <p class="text-7xl font-bold pt-20 mx-auto text-center text-white w-1/2">
+            <p class="text-3xl sm:text-7xl font-bold pt-20 mx-auto text-center text-white w-3/4 sm:w-1/2">
                 Demuestra tu intento de mediación de forma rápida, fácil y 
                 <span class="text-green-500 font-extrabold">100% legal</span>
             </p>
-            <p class="text-center text-white p-4 text-xl w-1/2 mx-auto">
+            <p class="text-center text-white p-4 sm:text-xl sm:w-1/2 mx-auto">
                 Inicia tu proceso de mediación en minutos con nuestra plataforma certificada. Segura, eficiente y legalmente compatible con la Ley 1/2025.
             </p>
             <div class="w-full flex flex-row justify-center">
