@@ -86,96 +86,103 @@ const validateCurrentStep = () => {
   let isValid = true;
   
   // Different validation logic based on step number
-  if (step.step === 1) {
-    if (!step.data.firstName.trim()) {
-      stepErrors['firstName'] = 'El nombre es obligatorio';
-      isValid = false;
-    }
-    
-    if (!step.data.lastName.trim()) {
-      stepErrors['lastName'] = 'El apellido es obligatorio';
-      isValid = false;
-    }
-    
-    if (!step.data.country) {
-      stepErrors['country'] = 'Selecciona un país';
-      isValid = false;
-    }
-    
-    if (!step.data.phone.trim()) {
-      stepErrors['phone'] = 'El teléfono es obligatorio';
-      isValid = false;
-    }
-    
-    if (!step.data.email.trim()) {
-      stepErrors['email'] = 'El email es obligatorio';
-      isValid = false;
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(step.data.email)) {
-      stepErrors['email'] = 'Email inválido';
-      isValid = false;
-    }
-  } 
-  else if (step.step === 2) {
-    if (!step.data.birthDate) {
-      stepErrors['birthDate'] = 'La fecha de nacimiento es obligatoria';
-      isValid = false;
-    }
-    
-    if (!step.data.city.trim()) {
-      stepErrors['city'] = 'La ciudad es obligatoria';
-      isValid = false;
-    }
-    
-    if (!step.data.address.trim()) {
-      stepErrors['address'] = 'La dirección es obligatoria';
-      isValid = false;
-    }
-  }
-  else if (step.step === 3) {
-    if (!step.data.firstName.trim()) {
-      stepErrors['firstName'] = 'El nombre es obligatorio';
-      isValid = false;
-    }
-    
-    if (!step.data.lastName.trim()) {
-      stepErrors['lastName'] = 'El apellido es obligatorio';
-      isValid = false;
-    }
-    
-    if (!step.data.email.trim()) {
-      stepErrors['email'] = 'El email es obligatorio';
-      isValid = false;
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(step.data.email)) {
-      stepErrors['email'] = 'Email inválido';
-      isValid = false;
-    }
-  }
-  else if (step.step === 4) {
-    if (!step.data.jurisdiction.trim()) {
-      stepErrors['jurisdiction'] = 'La jurisdicción es obligatoria';
-      isValid = false;
-    }
-    
-    if (!step.data.scope.trim()) {
-      stepErrors['scope'] = 'El ámbito es obligatorio';
-      isValid = false;
-    }
-    
-    if (!step.data.topic.trim()) {
-      stepErrors['topic'] = 'El tema es obligatorio';
-      isValid = false;
-    }
-  }
-  else if (step.step === 5) {
-    if (!step.data.plan.trim()) {
-      stepErrors['plan'] = 'El plan de mediación es obligatorio';
-      isValid = false;
-    }
-    
-    if (!step.data.agreement) {
-      stepErrors['agreement'] = 'Debes aceptar el acuerdo';
-      isValid = false;
-    }
+  switch(step.step) {
+    case 1:
+        if (!step.data.firstName.trim()) {
+        stepErrors['firstName'] = 'El nombre es obligatorio';
+        isValid = false;
+        }
+        
+        if (!step.data.lastName.trim()) {
+        stepErrors['lastName'] = 'El apellido es obligatorio';
+        isValid = false;
+        }
+        
+        if (!step.data.country) {
+        stepErrors['country'] = 'Selecciona un país';
+        isValid = false;
+        }
+        
+        if (!step.data.phone.trim()) {
+        stepErrors['phone'] = 'El teléfono es obligatorio';
+        isValid = false;
+        }
+        
+        if (!step.data.email.trim()) {
+        stepErrors['email'] = 'El email es obligatorio';
+        isValid = false;
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(step.data.email)) {
+        stepErrors['email'] = 'Email inválido';
+        isValid = false;
+        }
+        break;
+
+    case 2:
+        if (!step.data.birthDate) {
+        stepErrors['birthDate'] = 'La fecha de nacimiento es obligatoria';
+        isValid = false;
+        }
+        
+        if (!step.data.city.trim()) {
+        stepErrors['city'] = 'La ciudad es obligatoria';
+        isValid = false;
+        }
+        
+        if (!step.data.address.trim()) {
+        stepErrors['address'] = 'La dirección es obligatoria';
+        isValid = false;
+        }
+        break;
+
+    case 3:
+        if (!step.data.firstName.trim()) {
+        stepErrors['firstName'] = 'El nombre es obligatorio';
+        isValid = false;
+        }
+        
+        if (!step.data.lastName.trim()) {
+        stepErrors['lastName'] = 'El apellido es obligatorio';
+        isValid = false;
+        }
+        
+        if (!step.data.email.trim()) {
+        stepErrors['email'] = 'El email es obligatorio';
+        isValid = false;
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(step.data.email)) {
+        stepErrors['email'] = 'Email inválido';
+        isValid = false;
+        }
+        break;
+
+    case 4:
+        if (!step.data.jurisdiction.trim()) {
+        stepErrors['jurisdiction'] = 'La jurisdicción es obligatoria';
+        isValid = false;
+        }
+        
+        if (!step.data.scope.trim()) {
+        stepErrors['scope'] = 'El ámbito es obligatorio';
+        isValid = false;
+        }
+        
+        if (!step.data.topic.trim()) {
+        stepErrors['topic'] = 'El tema es obligatorio';
+        isValid = false;
+        }
+        
+        break;
+
+    case 5:
+        if (!step.data.plan.trim()) {
+        stepErrors['plan'] = 'El plan de mediación es obligatorio';
+        isValid = false;
+        }
+        
+        if (!step.data.agreement) {
+        stepErrors['agreement'] = 'Debes aceptar el acuerdo';
+        isValid = false;
+        }
+        break;
   }
   
   errors.value = stepErrors;
@@ -214,9 +221,9 @@ const submitForm = () => {
                 <div v-for="step in formSteps" :key="step.step" class="flex flex-col items-center">
                     <div 
                       :class="[
-                        'rounded-full h-10 w-10 flex items-center justify-center font-bold', 
+                        'rounded-lg h-10 w-10 flex items-center justify-center font-bold', 
                         currentStep >= step.step 
-                          ? 'bg-blue-600 text-white' 
+                          ? 'bg-green-400 text-white' 
                           : 'bg-gray-200 text-gray-700'
                       ]"
                     >
@@ -251,7 +258,7 @@ const submitForm = () => {
                         id="firstName"
                         v-model="currentStepData.data.firstName"
                         type="text" 
-                        class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="Tu nombre"
                     >
                     <p v-if="errors.firstName" class="text-red-500 text-sm mt-1">{{ errors.firstName }}</p>
@@ -263,7 +270,7 @@ const submitForm = () => {
                         id="lastName"
                         v-model="currentStepData.data.lastName"
                         type="text" 
-                        class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="Tus apellidos"
                     >
                     <p v-if="errors.lastName" class="text-red-500 text-sm mt-1">{{ errors.lastName }}</p>
@@ -274,7 +281,7 @@ const submitForm = () => {
                     <select 
                         id="country"
                         v-model="currentStepData.data.country"
-                        class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     >
                         <option value="" disabled selected>Selecciona un país</option>
                         <option v-for="country in countries" :key="country.code" :value="country.code">
@@ -290,7 +297,7 @@ const submitForm = () => {
                         id="phone"
                         v-model="currentStepData.data.phone"
                         type="tel" 
-                        class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="Tu teléfono"
                     >
                     <p v-if="errors.phone" class="text-red-500 text-sm mt-1">{{ errors.phone }}</p>
@@ -302,7 +309,7 @@ const submitForm = () => {
                         id="email"
                         v-model="currentStepData.data.email"
                         type="email" 
-                        class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="Tu email"
                     >
                     <p v-if="errors.email" class="text-red-500 text-sm mt-1">{{ errors.email }}</p>
@@ -317,7 +324,7 @@ const submitForm = () => {
                         id="birthDate"
                         v-model="currentStepData.data.birthDate"
                         type="date" 
-                        class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     >
                     <p v-if="errors.birthDate" class="text-red-500 text-sm mt-1">{{ errors.birthDate }}</p>
                 </div>
@@ -328,7 +335,7 @@ const submitForm = () => {
                         id="borthPlace"
                         v-model="currentStepData.data.borthPlace"
                         type="text" 
-                        class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="Lugar de nacimiento"
                     >
                 </div>
@@ -339,7 +346,7 @@ const submitForm = () => {
                         id="city"
                         v-model="currentStepData.data.city"
                         type="text" 
-                        class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="Tu ciudad"
                     >
                     <p v-if="errors.city" class="text-red-500 text-sm mt-1">{{ errors.city }}</p>
@@ -351,7 +358,7 @@ const submitForm = () => {
                         id="address"
                         v-model="currentStepData.data.address"
                         type="text" 
-                        class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="Tu dirección"
                     >
                     <p v-if="errors.address" class="text-red-500 text-sm mt-1">{{ errors.address }}</p>
@@ -363,7 +370,7 @@ const submitForm = () => {
                         id="postalCode"
                         v-model="currentStepData.data.postalCode"
                         type="text" 
-                        class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="Tu código postal"
                     >
                 </div>
@@ -377,7 +384,7 @@ const submitForm = () => {
                         id="reqFirstName"
                         v-model="currentStepData.data.firstName"
                         type="text" 
-                        class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="Nombre de la otra parte"
                     >
                     <p v-if="errors.firstName" class="text-red-500 text-sm mt-1">{{ errors.firstName }}</p>
@@ -389,7 +396,7 @@ const submitForm = () => {
                         id="reqLastName"
                         v-model="currentStepData.data.lastName"
                         type="text" 
-                        class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="Apellidos de la otra parte"
                     >
                     <p v-if="errors.lastName" class="text-red-500 text-sm mt-1">{{ errors.lastName }}</p>
@@ -400,7 +407,7 @@ const submitForm = () => {
                     <select 
                         id="reqCountry"
                         v-model="currentStepData.data.country"
-                        class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     >
                         <option value="" disabled selected>Selecciona un país</option>
                         <option v-for="country in countries" :key="country.code" :value="country.code">
@@ -415,7 +422,7 @@ const submitForm = () => {
                         id="reqPhone"
                         v-model="currentStepData.data.phone"
                         type="tel" 
-                        class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="Teléfono de la otra parte"
                     >
                 </div>
@@ -426,7 +433,7 @@ const submitForm = () => {
                         id="reqEmail"
                         v-model="currentStepData.data.email"
                         type="email" 
-                        class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="Email de la otra parte"
                     >
                     <p v-if="errors.email" class="text-red-500 text-sm mt-1">{{ errors.email }}</p>
@@ -437,37 +444,53 @@ const submitForm = () => {
             <div v-else-if="currentStep === 4" class="space-y-4">
                 <div>
                     <label class="block text-gray-700 font-medium mb-2" for="jurisdiction">Jurisdicción</label>
-                    <input 
+                    <select 
                         id="jurisdiction"
                         v-model="currentStepData.data.jurisdiction"
                         type="text" 
-                        class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="Jurisdicción"
                     >
+                        <option value="" disabled selected>Selecciona una jurisdicción</option>
+                        <option value="civil">Civil</option>
+                        <option value="criminal">Criminal</option>
+                        <option value="administrative">Administrativa</option>
+                    </select>
                     <p v-if="errors.jurisdiction" class="text-red-500 text-sm mt-1">{{ errors.jurisdiction }}</p>
                 </div>
                 
                 <div>
                     <label class="block text-gray-700 font-medium mb-2" for="scope">Ámbito</label>
-                    <input 
+                    <select 
                         id="scope"
                         v-model="currentStepData.data.scope"
                         type="text" 
-                        class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="Ámbito de mediación"
                     >
+                        <option value="" disabled selected>Selecciona un ámbito</option>
+                        <option value="family">Familiar</option>
+                        <option value="work">Laboral</option>
+                        <option value="commercial">Comercial</option>
+                        <option value="community">Comunitario</option>
+                    </select>
                     <p v-if="errors.scope" class="text-red-500 text-sm mt-1">{{ errors.scope }}</p>
                 </div>
                 
                 <div>
                     <label class="block text-gray-700 font-medium mb-2" for="topology">Tipología</label>
-                    <input 
+                    <select 
                         id="topology"
                         v-model="currentStepData.data.topology"
                         type="text" 
-                        class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="Tipología"
                     >
+                        <option value="" disabled selected>Selecciona una tipología</option>
+                        <option value="mediation">Mediación</option>
+                        <option value="conciliation">Conciliación</option>
+                        <option value="arbitration">Arbitraje</option>
+                    </select>
                 </div>
                 
                 <div>
@@ -476,7 +499,7 @@ const submitForm = () => {
                         id="topic"
                         v-model="currentStepData.data.topic"
                         type="text" 
-                        class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="Tema de mediación"
                     >
                     <p v-if="errors.topic" class="text-red-500 text-sm mt-1">{{ errors.topic }}</p>
@@ -488,7 +511,7 @@ const submitForm = () => {
                         id="description"
                         v-model="currentStepData.data.description"
                         rows="4"
-                        class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="Descripción detallada"
                     ></textarea>
                 </div>
@@ -502,20 +525,20 @@ const submitForm = () => {
                         id="plan"
                         v-model="currentStepData.data.plan"
                         rows="6"
-                        class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="Describe el plan de mediación"
                     ></textarea>
                     <p v-if="errors.plan" class="text-red-500 text-sm mt-1">{{ errors.plan }}</p>
                 </div>
                 
-                <div class="flex items-center">
+                <div class="flex items-center border-gray-300 border-1 p-4 rounded-md">
                     <input 
                         id="agreement"
                         v-model="currentStepData.data.agreement"
                         type="checkbox" 
                         class="h-5 w-5 text-blue-600 rounded focus:ring-blue-500"
                     >
-                    <label for="agreement" class="ml-2 text-gray-700">
+                    <label for="agreement" class="ml-2 text-gray-700 rounded-md">
                         Acepto los términos y condiciones del plan de mediación
                     </label>
                 </div>
@@ -536,7 +559,7 @@ const submitForm = () => {
                 
                 <button 
                     type="submit"
-                    class="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    class="px-6 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
                     {{ currentStep === formSteps.length ? 'Enviar' : 'Siguiente' }}
                 </button>
