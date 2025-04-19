@@ -4,6 +4,7 @@ import IconCard from '../components/IconCard.vue';
 import { cardItems, mandatoryCaseItems, serviceItems } from './Data';
 import ServiceItem from './ServiceItem.vue';
 import MandatoryCaseItem from './MandatoryCaseItem.vue';
+import MediationForm from './Mediation/MediationForm.vue';
 </script>
 <template>
     <div>
@@ -85,5 +86,9 @@ import MandatoryCaseItem from './MandatoryCaseItem.vue';
         </button>
       </div>  
     </div>
+  </div>
+  <div class="w-full bg-white text-black py-10">    
+      <MediationForm />    
+    
   </div>
 </template>
