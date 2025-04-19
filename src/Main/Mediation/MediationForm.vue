@@ -1,7 +1,8 @@
 <script lang="ts" setup>
 import { ref, computed, watch } from 'vue'
 import { getCountryPhoneCodes } from './mediationService';
-
+import PricingItem from '@/Pricing/PricingItem.vue';
+import { prices } from '@/Pricing/Data';
 const countries = ref([]);
 const loading = ref(true);
 
@@ -211,6 +212,16 @@ const submitForm = () => {
     alert('Formulario enviado con éxito!');
   }
 };
+
+watch(currentStepData.value.data.plan, (newValue) => {
+  if (newValue) {
+    const selectedPlan = prices.find(price => price.title === newValue);
+    if (selectedPlan) {
+      // currentStepData.value.data.plan = selectedPlan;
+      console.log('Selected plan:', selectedPlan);
+    }
+  }
+});
 </script>
 
 <template>   
@@ -520,14 +531,21 @@ const submitForm = () => {
             <!-- Step 5: Mediation Plan -->
             <div v-else-if="currentStep === 5" class="space-y-4">
                 <div>
-                    <label class="block text-gray-700 font-medium mb-2" for="plan">Plan de Mediación</label>
-                    <textarea 
-                        id="plan"
-                        v-model="currentStepData.data.plan"
-                        rows="6"
-                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        placeholder="Describe el plan de mediación"
-                    ></textarea>
+                    <div class="flex items-center mb-2">                        
+                        <select 
+                            id="plan"
+                            v-model="currentStepData.data.plan"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="" disabled selected>Selecciona un plan de mediación</option>
+                            <option v-for="(price, index) in prices" :key="index" :value="price.title">
+                                {{ price.title }} - {{ price.price }} €
+                            </option>
+                        </select>
+                        <div class="ml-2">
+                        </div>                        
+                        
+                    </div>
+
                     <p v-if="errors.plan" class="text-red-500 text-sm mt-1">{{ errors.plan }}</p>
                 </div>
                 
