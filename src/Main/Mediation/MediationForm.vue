@@ -3,6 +3,7 @@ import { ref, computed, watch } from 'vue'
 import { getCountryPhoneCodes } from './mediationService';
 import PricingItem from '@/Pricing/PricingItem.vue';
 import { prices } from '@/Pricing/Data';
+import CheckIcon from '@/components/Icons/CheckIcon.vue';
 const countries = ref([]);
 const loading = ref(true);
 
@@ -209,6 +210,7 @@ const submitForm = () => {
   if (validateCurrentStep()) {
     // Here you would process the form data, e.g., send to API
     console.log('Form submitted successfully', formSteps.value);
+    console.log('currentStepData.data', currentStepData.value.data);
     alert('Formulario enviado con éxito!');
   }
 };
@@ -531,16 +533,29 @@ watch(currentStepData.value.data.plan, (newValue) => {
             <!-- Step 5: Mediation Plan -->
             <div v-else-if="currentStep === 5" class="space-y-4">
                 <div>
-                    <div class="flex items-center mb-2">                        
-                        <select 
-                            id="plan"
-                            v-model="currentStepData.data.plan"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <option value="" disabled selected>Selecciona un plan de mediación</option>
-                            <option v-for="(price, index) in prices" :key="index" :value="price.title">
-                                {{ price.title }} - {{ price.price }} €
-                            </option>
-                        </select>
+                    <div class="grid sm:grid-cols-3 items-center mb-2 w-fit gap-1">                        
+                        <div v-for="(price, index) in prices" :key="index" class="w-1/3 relative">
+                            <PricingItem                        
+                                :title="price.title"
+                                :subtitle="price.subtitle"
+                                :description="price.description"
+                                :price="price.price"
+                                :features="price.features"
+                                :cardWidth="'w-70'"
+                                @click="currentStepData.data.plan = price.title"
+                                :selected="currentStepData.data.plan === price.title"
+                            />
+                            <div v-if="currentStepData.data.plan === price.title" 
+                            class="w-11 h-11 absolute bottom-4 left-26 border-3 border-green-500 rounded-full bg-white">
+                                <CheckIcon 
+                                    v-if="currentStepData.data.plan === price.title" 
+                                    class="w-8 h-8 stroke-green-500 left-0.5 top-1 absolute"                                   
+                                />
+                            </div>
+                            <input radiogroup="plan" type="radio" :value="price.title" v-model="currentStepData.data.plan" class="hidden" />
+
+                        </div>
+                        
                         <div class="ml-2">
                         </div>                        
                         
