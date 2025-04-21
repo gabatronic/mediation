@@ -1,3 +1,4 @@
+const API_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
 export const getCountryPhoneCodes = async () => {
     const countryPhoneCodes = [
         { country: "Afghanistan", code: "+93", flag: "🇦🇫" },
@@ -71,15 +72,62 @@ export const getCountryPhoneCodes = async () => {
     return countryPhoneCodes;
 }
 
-export const getJuristions = async () => {
-    const jurisdictions = [
-        { 
-            jurisdiction: "Civil", 
-            code: "cv",
-            scopes: [
-                { scope: "divorcios", code: "cv" },
-            ]
-        },
-    ]
-    return jurisdictions;
+export type Jurisdiction = {
+    id: string;
+    name: string
+}
+export type Scope = {
+    jurisdictionId: string;
+    id: string;
+    name: string;
+}
+export type Topology = {
+    jurisdictionId: string;
+    scopeId: string;
+    id: string;
+    name: string;
+}
+export const getJuristions = async ():Promise<Jurisdiction[]> => {
+    
+    try {
+        var response = await fetch(`${API_URL}/jurisdictions`)
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        var jurisdictions = await response.json() as Jurisdiction[];
+        return jurisdictions;
+    }
+    catch (error) {
+        console.error('Error fetching jurisdictions:', error);
+        return [];
+    }    
+}
+
+export const getScopes = async (jurisdictionId: string):Promise<Scope[]> => {
+    try {
+        var response = await fetch(`${API_URL}/jurisdictions/${jurisdictionId}/scopes`)
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        var scopes = await response.json() as Scope[];
+        return scopes;
+    }
+    catch (error) {
+        console.error('Error fetching jurisdictions:', error);
+        return [];
+    }    
+}
+export const getTopologies = async (scopeId: string):Promise<Topology[]> => {
+    try {
+        var response = await fetch(`${API_URL}/scopes/${scopeId}/topologies`)
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        var topologies = await response.json() as Topology[];
+        return topologies;
+    }
+    catch (error) {
+        console.error('Error fetching jurisdictions:', error);
+        return [];
+    }    
 }

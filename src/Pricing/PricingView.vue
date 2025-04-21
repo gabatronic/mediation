@@ -1,7 +1,13 @@
 <script lang="ts" setup>
-import { prices } from './Data'
+import { ref, onMounted } from 'vue'
+import { getPlans, Plan, PlanFeature } from './PlansService'
 import PricingItem from './PricingItem.vue'
 
+const prices = ref<Plan[]>()
+onMounted(async () => {
+    const response = await getPlans()
+    prices.value = response
+})
 </script>
 <template>
     <div class="w-full bg-white text-black p-5">
@@ -11,11 +17,11 @@ import PricingItem from './PricingItem.vue'
                 <div v-for="(price, index) in prices"
                     :key="index" class="relative">
                     <PricingItem                        
-                        :title="price.title"
+                        :title="price.name"
                         :subtitle="price.subtitle"
                         :description="price.description"
-                        :price="price.price"
-                        :features="price.features"
+                        :price="price.cost"
+                        :features="price.features.map((feature: PlanFeature) => feature.description)"
                         cardWidth="w-80"
                     />  
                     <div class="w-40 absolute bottom-4 left-10">

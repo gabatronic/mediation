@@ -1,16 +1,21 @@
 <script lang="ts" setup>
 import { ref, computed, watch } from 'vue'
 import { getCountryPhoneCodes } from './mediationService';
+import { getPlans, Plan, PlanFeature } from '@/Pricing/PlansService';
 import PricingItem from '@/Pricing/PricingItem.vue';
-import { prices } from '@/Pricing/Data';
+
 import CheckIcon from '@/components/Icons/CheckIcon.vue';
 const countries = ref([]);
 const loading = ref(true);
-
+const prices = ref<Plan[]>();
 // Load countries on component mount
 getCountryPhoneCodes().then(result => {
   countries.value = result;
   loading.value = false;
+});
+
+getPlans().then(result => {
+  prices.value = result;
 });
 
 const formSteps = ref(
@@ -536,14 +541,14 @@ watch(currentStepData.value.data.plan, (newValue) => {
                     <div class="grid sm:grid-cols-3 items-center mb-2 w-fit gap-1">                        
                         <div v-for="(price, index) in prices" :key="index" class="w-1/3 relative">
                             <PricingItem                        
-                                :title="price.title"
+                                :title="price.name"
                                 :subtitle="price.subtitle"
                                 :description="price.description"
-                                :price="price.price"
-                                :features="price.features"
+                                :price="price.cost"
+                                :features="price.features.map((feature) => feature.description)"
                                 :cardWidth="'w-70'"
-                                @click="currentStepData.data.plan = price.title"
-                                :selected="currentStepData.data.plan === price.title"
+                                @click="currentStepData.data.plan = price.id"
+                                :selected="currentStepData.data.plan === price.id"
                             />
                             <div v-if="currentStepData.data.plan === price.title" 
                             class="w-11 h-11 absolute bottom-4 left-26 border-3 border-green-500 rounded-full bg-white">
