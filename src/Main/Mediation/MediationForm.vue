@@ -550,14 +550,14 @@ watch(currentStepData.value.data.plan, (newValue) => {
                                 @click="currentStepData.data.plan = price.id"
                                 :selected="currentStepData.data.plan === price.id"
                             />
-                            <div v-if="currentStepData.data.plan === price.title" 
+                            <div v-if="currentStepData.data.plan === price.id" 
                             class="w-11 h-11 absolute bottom-4 left-26 border-3 border-green-500 rounded-full bg-white">
                                 <CheckIcon 
-                                    v-if="currentStepData.data.plan === price.title" 
+                                    v-if="currentStepData.data.plan === price.id" 
                                     class="w-8 h-8 stroke-green-500 left-0.5 top-1 absolute"                                   
                                 />
                             </div>
-                            <input radiogroup="plan" type="radio" :value="price.title" v-model="currentStepData.data.plan" class="hidden" />
+                            <input radiogroup="plan" type="radio" :value="price.id" v-model="currentStepData.data.plan" class="hidden" />
 
                         </div>
                         
