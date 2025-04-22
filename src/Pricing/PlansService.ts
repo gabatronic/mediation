@@ -7,6 +7,7 @@ export type PlanFeature = {
 export type Plan = {
   id: string;  
   name: string;
+  subtitle: string;
   description: string;
   cost: number;  
   features: Array<PlanFeature>;
