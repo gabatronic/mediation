@@ -18,6 +18,11 @@ const router = createRouter({
       name: 'lawyers',
       component: () => import('../Lawyer/LawyerView.vue'),
     },
+    {
+      path: '/admin',
+      name: 'admin',
+      component: () => import('../Admin/AdminView.vue'),
+    }
   ],
   scrollBehavior(to, from, savedPosition) {
     if (to.hash) {

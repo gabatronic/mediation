@@ -2,7 +2,6 @@
 import { RouterLink, RouterView } from 'vue-router'
 import Menu from './components/Menu.vue'
 import HomeFooter from './components/HomeFooter.vue'
-import MainView from './Main/MainView.vue';
 </script>
 
 <template>
