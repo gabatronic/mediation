@@ -9,9 +9,11 @@ const toggleMenu = () => {
 </script>
 <template>
 <div class="w-full relative sm:flex sm:flex-row sm:container sm:mx-auto">
-    <div class="text-white p-2 flex flex-row sm:gap-2 py-3 relative mx-auto relative">
+    <div class="text-white p-2 flex flex-row sm:gap-2 py-3 sm:mx-auto w-100 ">
         <a href="/"><img src="../assets//images/logo.png" alt="Logo" class="w-30 left-0 sm:-translate-x-50 " /></a>
-        <BurgerMenuIcon class="stroke-white w-10 absolute sm:hidden right-10" @click="toggleMenu"/>
+        <div class="grow relative flex justify-end" >
+          <BurgerMenuIcon class="stroke-white w-10 sm:hidden" @click="toggleMenu"/>
+        </div>
     </div>
     <div class="bg-background flex flex-col sm:flex-row gap-4 transition-all overflow-y-hidden sm:gap-1 absolute sm:relative right-1 top-2 h-0 sm:h-fit sm:items-end" 
        :class="{'h-0 sm:h-fit': !isOpen, 'h-fit left-0 translate-y-12 py-4': isOpen}">
